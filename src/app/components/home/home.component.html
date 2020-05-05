@@ -1,0 +1,101 @@
+<ng-marquee duration="30">
+  {{ marquee }}
+</ng-marquee>
+
+<mat-divider></mat-divider>
+
+<div class="home-image">
+    <app-images></app-images>
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-tab-group>
+  <mat-tab label="Top Stories">
+        <mat-card>
+          <mat-card-title>Top Stories</mat-card-title>
+          <mat-card-content>
+            <ng-container>
+              <mat-action-list>
+                <mat-list-item *ngFor="let news of topStoriesNews.topStories">
+                  <div>
+                    <span matLine>{{ news.title }}</span>
+                    <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
+                  </div>
+                </mat-list-item>
+              </mat-action-list>
+            </ng-container>
+          </mat-card-content>
+          <mat-card-actions></mat-card-actions>
+        </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Entertainment">
+    <mat-card>
+        <mat-card-title>Entertainment</mat-card-title>
+        <mat-card-content>
+          <ng-container>
+            <mat-action-list>
+              <mat-list-item *ngFor="let news of entertainmentNews.entertainment">
+                <div>
+                  <span matLine>{{ news.title }}</span>
+                  <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
+              </div>
+              </mat-list-item>
+            </mat-action-list>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Sports">
+    <mat-card>
+        <mat-card-title>Sport</mat-card-title>
+        <mat-card-content>
+          <ng-container>
+            <mat-action-list>
+              <mat-list-item *ngFor="let news of sportsNews.sports">
+                <div>               
+                    <span matLine>{{ news.title }}</span>
+                  <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
+                </div>
+              </mat-list-item>
+            </mat-action-list>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Technology">
+    <mat-card>
+        <mat-card-title>Technology</mat-card-title>
+        <mat-card-content>
+          <ng-container>
+            <mat-action-list>
+              <mat-list-item *ngFor="let news of technologyNews.technology">
+                <div>
+                  <span matLine>{{ news.title }}</span>
+                  <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
+                </div>
+              </mat-list-item>
+            </mat-action-list>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+  </mat-tab>
+</mat-tab-group>
+
+<mat-divider></mat-divider>
+
+<mat-card>
+    <mat-card-title>Read News</mat-card-title>
+    <mat-card-content>
+        <ng-container>
+            <h2>{{ newsOpen.title }}</h2>
+            <h3>{{ newsOpen.details }}</h3>
+        </ng-container>
+    </mat-card-content>
+</mat-card>

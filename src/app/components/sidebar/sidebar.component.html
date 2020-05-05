@@ -1,0 +1,82 @@
+<div class="sidebar">
+  <mat-nav-list>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="20px"
+      class="date-time"
+    >
+      <mat-action-list fxFlex="20" *ngFor="let date of timeService.getDate">
+        <mat-list-item>
+          <h1 align="center">{{ date.hour }}:{{ date.minute }}</h1>
+        </mat-list-item>
+      </mat-action-list>
+      <mat-action-list fxFlex="30" *ngFor="let date of timeService.getDate">
+        <mat-list-item>
+          <h2 align="center">{{ date.week }}</h2>
+        </mat-list-item>
+      </mat-action-list>
+      <mat-action-list fxFlex="50" *ngFor="let date of timeService.getDate">
+        <mat-list-item>
+          <h5 align="center">
+            {{ date.day }} {{ date.month }}, {{ date.year }}
+          </h5>
+        </mat-list-item>
+      </mat-action-list>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profile-card">
+      <div class="header">
+        <h2>Bernard Iorver</h2>
+        <h4>Benion</h4>
+      </div>
+      <img src="../../../assets/images/benion.jpg" alt="Bernard Iorver" />
+    </div>
+    <mat-divider></mat-divider>
+    <div class="pages">
+      <h2 matSubheader>Pages</h2>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/home"
+        ><span fxFlex fxFlexAlign="flex-end">Home</span>
+        <mat-icon>home</mat-icon></a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="list-item-active"
+        routerLink="/contacts"
+        ><span fxFlex fxFlexAlign="flex-end">Contacts</span>
+        <mat-icon>people_alt</mat-icon></a
+      >
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/works"
+        ><span fxFlex fxFlexAlign="flex-end">My Works</span>
+        <mat-icon>category</mat-icon></a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="list-item-active"
+        routerLink="/about-me"
+        ><span fxFlex fxFlexAlign="flex-end">About Me</span>
+        <mat-icon>import_contacts</mat-icon></a
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <div class="tools">
+      <h2 matSubheader>Tools</h2>
+      <a mat-list-item href="https://benion-tech.herokuapp.com/benion-users/"
+        ><span fxFlex fxFlexAlign="flex-end">User HomePage</span>
+        <mat-icon>home</mat-icon></a
+      >
+      <a mat-list-item href="https://benion-tech.herokuapp.com/benion-users/benion-users-register/"
+        ><span fxFlex fxFlexAlign="flex-end">Register</span>
+        <mat-icon>add_box</mat-icon></a
+      >
+      <a mat-list-item href="https://benion-tech.herokuapp.com/benion-users/benion-users-login/"
+        ><span fxFlex fxFlexAlign="flex-end">Log In</span>
+        <mat-icon>person_outline</mat-icon></a
+      >
+      <a mat-list-item href="https://benion-tech.herokuapp.com/benion-chat/"
+        ><span fxFlex fxFlexAlign="flex-end">Chat Room</span>
+        <mat-icon>drafts</mat-icon></a
+      >
+    </div>
+  </mat-nav-list>
+</div>

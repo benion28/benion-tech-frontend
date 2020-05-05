@@ -1,0 +1,14 @@
+<div *ngFor="let image of worksImages" class="work-images">
+  <div class="work-image">
+    <mat-card fxFlex fxFlexAlign="center">
+      <mat-card-title>{{ image.title }}</mat-card-title>
+      <img src="${{ image.imageSrc }}" alt="${{ image.title }}" />
+      <mat-card-actions>
+        <a href="{{ image.href }}">
+          <button mat-button color="accent">Visit This Page</button>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+    <mat-divider></mat-divider>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+.add-bottom-padding .news-button{
+    margin-left: 40%;
+}
+
+.normal-form {
+    align-items: center;
+}
+
+.mat-card {
+    width: 600px;
+    margin: auto;
+}
+
+.mat-card .full-width {
+    width: 100%;
+}

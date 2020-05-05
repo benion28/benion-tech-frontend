@@ -1,0 +1,58 @@
+<mat-card fxFlex fxFlexAlign="center">
+  <mat-card-header>
+    <div mat-card-avatar></div>
+    <mat-card-title>BENION ADMIN PAGE</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="../../../assets/images/smart-city.jpg" />
+  <mat-card-content>
+    <span fxFlex fxFlexAlign="center" class="menu-span" align="center">Benion Admin Links</span>
+  </mat-card-content>
+  <mat-card-actions>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" class="first-group">
+      <button
+        mat-stroked-button
+        color="accent"
+        class="mat-button"
+        routerLink="/benion-admin/admin-users"
+        fxFlex="30"
+      >
+        Users
+      </button>
+      <button
+        mat-stroked-button
+        color="accent"
+        class="mat-button"
+        routerLink="/benion-admin/admin-contacts"
+        fxFlex="40"
+      >
+        Contacts
+      </button>
+      <button
+        mat-stroked-button
+        color="accent"
+        class="mat-button"
+        routerLink="/benion-admin/admin-news"
+        fxFlex="30"
+      >
+        News
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" class="second-group">
+      <a fxFlex="30" href="https://benion-tech.herokuapp.com/benion-admin-users/">
+        <button mat-stroked-button color="accent" class="mat-button">
+          Admin HomePage Link
+        </button>
+      </a>
+      <a fxFlex="40" href="https://benion-tech.herokuapp.com/benion-users/benion-login-users/">
+        <button mat-stroked-button color="accent" class="mat-button">
+          Login Users Link
+        </button>
+      </a>
+      <a fxFlex="30" href="https://benion-tech.herokuapp.com/benion-admin-users/benion-admin-users-lists/">
+        <button mat-stroked-button color="accent" class="mat-button">
+          Admin Users Link
+        </button>
+      </a>
+    </div>
+  </mat-card-actions>
+</mat-card>
