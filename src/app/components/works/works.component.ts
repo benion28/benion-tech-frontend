@@ -67,6 +67,16 @@ export class WorksComponent implements OnInit {
       title: 'Benion Parcel Boilerplate',
       imageSrc: '../../../assets/images/benion-parcel.jpg',
       href: 'https://benion28.github.io/benion-parcel/'
+    },
+    {
+      title: 'Benion Health Panel With CSS Grid And Image Span',
+      imageSrc: '../../../assets/images/benion-health-panel.jpg',
+      href: 'https://benion28.github.io/benion-health-panel/'
+    },
+    {
+      title: 'Benion React Hooks With Firebase CRUD',
+      imageSrc: '../../../assets/images/benion-firebase-crud.jpg',
+      href: 'https://benion28.github.io/benion-firebase-crud/'
     }
   ];
 
