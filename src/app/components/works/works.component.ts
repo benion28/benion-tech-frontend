@@ -77,6 +77,26 @@ export class WorksComponent implements OnInit {
       title: 'Benion React Hooks With Firebase CRUD',
       imageSrc: '../../../assets/images/benion-firebase-crud.jpg',
       href: 'https://benion28.github.io/benion-firebase-crud/'
+    },
+    {
+      title: 'A Product Card With CSS Designs',
+      imageSrc: '../../../assets/images/product-card.jpg',
+      href: 'https://benion28.github.io/product-card/'
+    },
+    {
+      title: 'An Animated Profile Card',
+      imageSrc: '../../../assets/images/animated-profile-card.jpg',
+      href: 'https://benion28.github.io/animated-profile-card/'
+    },
+    {
+      title: 'A Responsive Login Form',
+      imageSrc: '../../../assets/images/responsive-login-form.jpg',
+      href: 'https://benion28.github.io/responsive-login-form/'
+    },
+    {
+      title: 'An Analog Clock',
+      imageSrc: '../../../assets/images/analog-clock.jpg',
+      href: 'https://benion28.github.io/analog-clock/'
     }
   ];
 

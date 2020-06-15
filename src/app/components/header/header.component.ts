@@ -13,14 +13,13 @@ export class HeaderComponent implements OnInit {
   constructor(public timeService: TimeService) { }
 
   ngOnInit(): void {
+    setInterval(() => {
+      this.timeService.reloadDateTime();
+    }, 1000);
   }
 
   onSidebartoggle() {
     this.toggleSidebarForMe.emit();
-  }
-
-  onReload() {
-    this.timeService.reloadDateTime();
   }
 
   onCreate() {

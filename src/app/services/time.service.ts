@@ -48,6 +48,8 @@ export class TimeService {
 
   hour = this.date.getHours();
 
+  second = this.date.getSeconds();
+
   getDate = [
     {
       id: 1,
@@ -56,7 +58,8 @@ export class TimeService {
       month: this.month,
       year: this.year,
       minute: this.minute,
-      hour: this.hour
+      hour: this.hour,
+      second: this.second
     }
   ];
 
@@ -66,13 +69,14 @@ export class TimeService {
     const updatedDate = new Date();
     this.getDate = [
       {
-      id: 1,
-      day: updatedDate.getDate(),
-      week: this.weeks[updatedDate.getDay()],
-      month: this.months[updatedDate.getMonth()],
-      year: updatedDate.getFullYear(),
-      minute: updatedDate.getMinutes(),
-      hour: updatedDate.getHours()
+        id: 1,
+        day: updatedDate.getDate(),
+        week: this.weeks[updatedDate.getDay()],
+        month: this.months[updatedDate.getMonth()],
+        year: updatedDate.getFullYear(),
+        minute: updatedDate.getMinutes(),
+        hour: updatedDate.getHours(),
+        second: updatedDate.getSeconds()
       }
     ];
   }

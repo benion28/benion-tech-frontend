@@ -20,20 +20,15 @@
       >
         <mat-icon>home</mat-icon>
       </button>
+      <div class="banner">
+        <a routerLink="/home"><img src="../../../assets/images/benion-tech-banner.png" width="150" height="40" loading="lazy"></a>
+      </div>
       <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
         <mat-action-list fxLayout="row" fxGap="20px">
           <mat-list-item *ngFor="let date of timeService.getDate">
-            <h1 align="center">{{ date.hour }}:{{ date.minute }}</h1>
+            <h1>{{ date.hour }}:{{ date.minute }}:{{ date.second }}</h1>
           </mat-list-item>
         </mat-action-list>
-        <button
-          mat-icon-button
-          matTooltip="Reload Time"
-          matTooltipClass="example-tooltip"
-          (click)="onReload()"
-        >
-          <mat-icon>access_time</mat-icon>
-        </button>
         <button
           mat-icon-button
           class="sidenav-button"
