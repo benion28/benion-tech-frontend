@@ -34,3 +34,7 @@
     border: #c0c017 2pt solid;
     border-radius: 5%;
 }
+
+.tools .expansion {
+    margin-top: 2vh;
+}

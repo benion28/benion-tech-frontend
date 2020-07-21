@@ -1,8 +1,9 @@
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,21 +45,22 @@ import { environment } from '../environments/environment';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { EntertainmentService } from './services/entertainment.service';
 import { NewsService } from './services/news.service';
-import { TopStoriesService } from './services/top-stories.service';
-import { SportsService } from './services/sports.service';
-import { TechnologyService } from './services/technology.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from './services/users.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NewLoginUserComponent } from './components/new-login-user/new-login-user.component';
+import { NewAdminUserComponent } from './components/new-admin-user/new-admin-user.component';
+import { ImagesService } from './services/images.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
     NewContactComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NewAdminUserComponent,
+    NewLoginUserComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import { HttpClientModule } from '@angular/common/http';
     AboutMeModule,
     ContactsModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MatButtonModule,
     MatCardModule,
@@ -96,24 +100,24 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatTooltipModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
   ],
   providers: [
     ContactsService,
     DepartmentsService,
     DialogService,
     NotificationsService,
-    EntertainmentService,
     NewsService,
-    TopStoriesService,
-    SportsService,
-    TechnologyService,
-    UsersService
+    UsersService,
+    ImagesService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     ConfirmDialogComponent,
-    NewContactComponent
+    NewContactComponent,
+    NewLoginUserComponent,
+    NewAdminUserComponent
   ]
 })
 export class AppModule { }

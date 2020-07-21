@@ -1,0 +1,52 @@
+.normal-form {
+    margin: 10px;
+}
+
+.normal-form .controllers-container {
+    width: 100%;
+    padding: 5%;
+}
+
+.normal-form .controllers-container > * {
+    width: 100%;
+}
+
+.normal-form .add-bottom-padding {
+    padding-bottom: 10px;
+}
+
+mat-radio-group mat-radio-button {
+    margin-left: 5px;
+}
+
+.button-row button {
+    margin: 5px;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+.button-dialog-close {
+    width: 45px;
+    min-width: 0px !important;
+    height: 40px;
+    padding: 0px !important;
+}
+
+:host .new-user-card {
+    text-align: center;
+    padding: 0 20px 20px 20px;
+    margin-bottom: 2vh;
+}
+
+:host .new-user-card img {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.expansion {
+    margin-top: 2vh;
+}

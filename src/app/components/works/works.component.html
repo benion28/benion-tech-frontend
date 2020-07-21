@@ -1,10 +1,10 @@
-<div *ngFor="let image of worksImages" class="work-images">
+<div *ngFor="let item of worksImages" class="work-images">
   <div class="work-image">
     <mat-card fxFlex fxFlexAlign="center">
-      <mat-card-title>{{ image.title }}</mat-card-title>
-      <img src="${{ image.imageSrc }}" alt="${{ image.title }}" />
+      <mat-card-title>{{ item.caption.toUpperCase().replace("-", " ") }}</mat-card-title>
+      <img [src]="item.image" alt="${{ item.caption }}" />
       <mat-card-actions>
-        <a href="{{ image.href }}">
+        <a href="{{ item.link }}">
           <button mat-button color="accent">Visit This Page</button>
         </a>
       </mat-card-actions>

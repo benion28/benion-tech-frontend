@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import * as _ from 'lodash';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -9,12 +9,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ContactsService {
   arrays = [];
 
+  image = null;
+
   constructor(private firebase: AngularFireDatabase) {}
 
   contactList: AngularFireList<any>;
 
   contactForm: FormGroup = new FormGroup({
     $key: new FormControl(null),
+    image: new FormControl(''),
     firstName: new FormControl('', [
       Validators.required,
       Validators.maxLength(10)
@@ -44,6 +47,7 @@ export class ContactsService {
   initializeFormGroup() {
     this.contactForm.setValue({
       $key: null,
+      image: '',
       firstName: '',
       lastName: '',
       userName: '',
@@ -60,12 +64,13 @@ export class ContactsService {
   }
 
   getContacts() {
-    this.contactList = this.firebase.list('users');
+    this.contactList = this.firebase.list('contacts');
     return this.contactList.snapshotChanges();
   }
 
   setContacts(contact) {
     this.arrays.push({
+      image: contact.image,
       firstName: contact.firstName,
       lastName: contact.lastName,
       userName: contact.userName,
@@ -83,6 +88,7 @@ export class ContactsService {
 
   insertContact(contact) {
     this.contactList.push({
+      image: contact.image,
       firstName: contact.firstName,
       lastName: contact.lastName,
       userName: contact.userName,
@@ -100,6 +106,7 @@ export class ContactsService {
 
   updateContact(contact) {
     this.contactList.update(contact.$key, {
+      image: contact.image,
       firstName: contact.firstName,
       lastName: contact.lastName,
       userName: contact.userName,
@@ -133,5 +140,13 @@ export class ContactsService {
         isWorking: true
       });
     }
+  }
+
+  setImage(image) {
+    this.image = image;
+  }
+
+  getImage() {
+    return this.image;
   }
 }

@@ -2,7 +2,8 @@
     <mat-card-title>Benion World Of Technology</mat-card-title>
     <mat-card-content>
         <ng-container>
-            <img src="../../../assets/images/technology.jpg" alt="Technology">
+            <img [src]="displayedImage.imgSrc" [alt]="displayedImage.imgTitle">
         </ng-container>
     </mat-card-content>
 </mat-card>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-works',
@@ -7,102 +8,114 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorksComponent implements OnInit {
 
-  worksImages = [
+  worksImages = [];
+
+  images = [
     {
-      title: 'Benion Animated Counter',
-      imageSrc: '../../../assets/images/benion-animated-counter.jpg',
-      href: 'https://benion28.github.io/benion-animated-counter/'
+      caption: 'Benion Animated Counter',
+      image: '../../../assets/images/benion-animated-counter.jpg',
+      link: 'https://benion28.github.io/benion-animated-counter/'
     },
     {
-      title: 'Benion Animated Moving Car',
-      imageSrc: '../../../assets/images/benion-animated-moving-car.jpg',
-      href: 'https://benion28.github.io/benion-animated-moving-car/'
+      caption: 'Benion Animated Moving Car',
+      image: '../../../assets/images/benion-animated-moving-car.jpg',
+      link: 'https://benion28.github.io/benion-animated-moving-car/'
     },
     {
-      title: 'Benion Expense Tracker MERN',
-      imageSrc: '../../../assets/images/benion-expense-tracker-mern.jpg',
-      href: 'https://benion-expense-tracker.herokuapp.com/'
+      caption: 'Benion Expense Tracker MERN',
+      image: '../../../assets/images/benion-expense-tracker-mern.jpg',
+      link: 'https://benion-expense-tracker.herokuapp.com/'
     },
     {
-      title: 'Benion Chat Room',
-      imageSrc: '../../../assets/images/benion-chat-room.jpg',
-      href: 'https://benion-chat-room.herokuapp.com/'
+      caption: 'Benion Chat Room',
+      image: '../../../assets/images/benion-chat-room.jpg',
+      link: 'https://benion-chat-room.herokuapp.com/'
     },
     {
-      title: 'Benion Admin Dashboard',
-      imageSrc: '../../../assets/images/benion-dashboard.jpg',
-      href: 'https://benion-dashboard.firebaseapp.com/'
+      caption: 'Benion Admin Dashboard',
+      image: '../../../assets/images/benion-dashboard.jpg',
+      link: 'https://benion-dashboard.firebaseapp.com/'
     },
     {
-      title: 'Benion Expense Tracker REACT',
-      imageSrc: '../../../assets/images/benion-expense-tracker-react.jpg',
-      href: 'https://benion28.github.io/benion-expense-tracker-react/'
+      caption: 'Benion Expense Tracker REACT',
+      image: '../../../assets/images/benion-expense-tracker-react.jpg',
+      link: 'https://benion28.github.io/benion-expense-tracker-react/'
     },
     {
-      title: 'Benion Project',
-      imageSrc: '../../../assets/images/benion-project.jpg',
-      href: 'https://beniontech.firebaseapp.com/'
+      caption: 'Benion Project',
+      image: '../../../assets/images/benion-project.jpg',
+      link: 'https://beniontech.firebaseapp.com/'
     },
     {
-      title: 'Benion Express',
-      imageSrc: '../../../assets/images/benion-express.jpg',
-      href: 'https://benion-express.herokuapp.com/'
+      caption: 'Benion Express',
+      image: '../../../assets/images/benion-express.jpg',
+      link: 'https://benion-express.herokuapp.com/'
     },
     {
-      title: 'Benion Portfolio',
-      imageSrc: '../../../assets/images/benion-portfolio.jpg',
-      href: 'https://github.com/benion28/benion-portfolio/'
+      caption: 'Benion Portfolio',
+      image: '../../../assets/images/benion-portfolio.jpg',
+      link: 'https://github.com/benion28/benion-portfolio/'
     },
     {
-      title: 'Benion Passport Login',
-      imageSrc: '../../../assets/images/benion-passport-login.jpg',
-      href: 'https://benion-passport-login.herokuapp.com/'
+      caption: 'Benion Passport Login',
+      image: '../../../assets/images/benion-passport-login.jpg',
+      link: 'https://benion-passport-login.herokuapp.com/'
     },
     {
-      title: 'Benion Tailwindcss Image Gallery',
-      imageSrc: '../../../assets/images/benion-tailwind.jpg',
-      href: 'https://benion28.github.io/benion-tailwind/'
+      caption: 'Benion Tailwindcss Image Gallery',
+      image: '../../../assets/images/benion-tailwind.jpg',
+      link: 'https://benion28.github.io/benion-tailwind/'
     },
     {
-      title: 'Benion Parcel Boilerplate',
-      imageSrc: '../../../assets/images/benion-parcel.jpg',
-      href: 'https://benion28.github.io/benion-parcel/'
+      caption: 'Benion Parcel Boilerplate',
+      image: '../../../assets/images/benion-parcel.jpg',
+      link: 'https://benion28.github.io/benion-parcel/'
     },
     {
-      title: 'Benion Health Panel With CSS Grid And Image Span',
-      imageSrc: '../../../assets/images/benion-health-panel.jpg',
-      href: 'https://benion28.github.io/benion-health-panel/'
+      caption: 'Benion Health Panel With CSS Grid And Image Span',
+      image: '../../../assets/images/benion-health-panel.jpg',
+      link: 'https://benion28.github.io/benion-health-panel/'
     },
     {
-      title: 'Benion React Hooks With Firebase CRUD',
-      imageSrc: '../../../assets/images/benion-firebase-crud.jpg',
-      href: 'https://benion28.github.io/benion-firebase-crud/'
+      caption: 'Benion React Hooks With Firebase CRUD',
+      image: '../../../assets/images/benion-firebase-crud.jpg',
+      link: 'https://benion28.github.io/benion-firebase-crud/'
     },
     {
-      title: 'A Product Card With CSS Designs',
-      imageSrc: '../../../assets/images/product-card.jpg',
-      href: 'https://benion28.github.io/product-card/'
+      caption: 'A Product Card With CSS Designs',
+      image: '../../../assets/images/product-card.jpg',
+      link: 'https://benion28.github.io/product-card/'
     },
     {
-      title: 'An Animated Profile Card',
-      imageSrc: '../../../assets/images/animated-profile-card.jpg',
-      href: 'https://benion28.github.io/animated-profile-card/'
+      caption: 'An Animated Profile Card',
+      image: '../../../assets/images/animated-profile-card.jpg',
+      link: 'https://benion28.github.io/animated-profile-card/'
     },
     {
-      title: 'A Responsive Login Form',
-      imageSrc: '../../../assets/images/responsive-login-form.jpg',
-      href: 'https://benion28.github.io/responsive-login-form/'
+      caption: 'A Responsive Login Form',
+      image: '../../../assets/images/responsive-login-form.jpg',
+      link: 'https://benion28.github.io/responsive-login-form/'
     },
     {
-      title: 'An Analog Clock',
-      imageSrc: '../../../assets/images/analog-clock.jpg',
-      href: 'https://benion28.github.io/analog-clock/'
+      caption: 'An Analog Clock',
+      image: '../../../assets/images/analog-clock.jpg',
+      link: 'https://benion28.github.io/analog-clock/'
     }
   ];
 
-  constructor() { }
+  constructor(public imagesService: ImagesService) { }
 
   ngOnInit(): void {
+    let images = [];
+    this.imagesService.getImages().subscribe(list => {
+      images = list.map(item => {
+        return {
+          $key: item.key,
+          ...item.payload.val()
+        };
+      });
+      this.worksImages = images.filter(image => image.category === 'Works');
+    });
   }
 
 }

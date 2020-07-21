@@ -28,9 +28,9 @@ export class ContactsComponent implements OnInit {
   // Contacts List
   displayedColumns: string[] = [
     'actions',
-    '$key',
     'firstName',
     'lastName',
+    'departmentName',
     'city'
   ];
 
@@ -66,14 +66,26 @@ export class ContactsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let departments = [];
+    this.departmentService.getDepartments().subscribe(
+      list => {
+        departments = list.map(item => {
+          return {
+            $key: item.key,
+            ...item.payload.val()
+          };
+        });
+      }
+    );
     this.contactsService.getContacts().subscribe(
       list => {
         this.contactsData = list.map(item => {
-          const department = 'department';
-          const departmentName = this.departmentService.getDepartmentName(item.payload.val()[department]);
+          const filteredDepartment = departments.filter(
+            department => item.payload.val().department.trim() === department.$key.trim()
+          );
           return {
             $key: item.key,
-            departmentName,
+            departmentName: filteredDepartment[0].name,
             ...item.payload.val()
           };
         });

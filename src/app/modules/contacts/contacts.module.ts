@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ContactsRoutingModule } from './contacts-routing.module';
-import { NewContactComponent } from 'src/app/components/new-contact/new-contact.component';
 import { ContactsComponent } from 'src/app/components/contacts/contacts.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -46,6 +46,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatSnackBarModule,
     MatTableModule,
+    MatListModule,
     MatIconModule,
     MatPaginatorModule,
     MatSortModule,

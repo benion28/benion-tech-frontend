@@ -1,0 +1,216 @@
+<mat-toolbar>
+    <span>{{ usersService.userSignUpForm.controls['_id'].value?"Modify An Existing User":"New User Registration" }} {{ usersService.adminUser.username !== null ? " (By Admin)" : " (By Guest)" }}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="button-dialog-close" mat-stroked-button (click)="onUserSignUpClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+
+<mat-grid-list cols="2" rowHeight="550px">
+    <mat-grid-tile>
+        <form [formGroup]="usersService.userSignUpForm" class="normal-form" (submit)="onUserSignUpSubmit()" autocomplete="off">
+            <div class="controllers-container">
+                <input type="hidden" formControlName="_id">
+                <mat-form-field>
+                    <input formControlName="firstname" matInput placeholder="First Name" required>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['firstname'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['firstname'].errors?.maxlength">Characters Should Not Be More Than 10</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="lastname" matInput placeholder="Last Name" required>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['lastname'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['lastname'].errors?.maxlength">Characters Should Not Be More Than 10</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="username" matInput placeholder="User Name" required>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['username'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['username'].errors?.maxlength">Characters Should Not Be More Than 10</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="email" matInput placeholder="Email Address" required>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['email'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['email'].errors?.email">Please Provide A Valid Email</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="city" matInput placeholder="City">
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['city'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['city'].errors?.maxlength">Characters Should Not Be More Than 15</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="password" matInput placeholder="Password" required type="password">
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['password'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="password2" matInput placeholder="Confirm Password" required type="password">
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['password2'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="usersService.userSignUpForm.controls['password2'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                </mat-form-field>
+                <div class="expansion">
+                    <mat-accordion>
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Couldn't Register?
+                          </mat-panel-title>
+                          <mat-panel-description>
+                            <mat-icon>report_problem</mat-icon>
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                    
+                        <h4>To Log In Use The Details Below..!!!</h4>
+                        <h3>Username: Guest</h3>
+                        <h3>Password: guest123</h3>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                <div class="button-row">
+                    <button mat-raised-button color="accent" type="submit" [disabled]="usersService.userSignUpForm.invalid">{{ usersService.userSignUpForm.controls['_id'].value?"Update":"Register" }}</button>
+                    <button mat-raised-button color="warn" (click)="onUserSignUpClear()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="new-user-card">
+            <div class="header" *ngIf="adminAccess.showLogo">
+                <h2>Already Have An Account?</h2>
+                <h4>You Can Log In Below...</h4>
+            </div>
+            <img *ngIf="adminAccess.showLogo" src="https://firebasestorage.googleapis.com/v0/b/benion-database.appspot.com/o/Others%2Fbenion-tech-fb-icon_1594856948707?alt=media&token=3904d6ba-05dd-4dca-a8bf-c57fdc6f7983" alt="Benion Tech" />
+            <ng-container *ngIf="!adminAccess.adminForgetPassword && !adminAccess.userForgetPassword">
+                <mat-action-list>
+                    <mat-list-item>
+                        <button
+                            matTooltipClass="example-tooltip"
+                            mat-list-item  
+                            (click)="loginAccess()"
+                            class="mat-button"
+                        >
+                        <span matLine>Click To Login As {{ !adminAccess.adminLogin ? " (An Admin)" : " (A Guest User)" }}</span>
+                            <mat-icon>next_plan</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-action-list>
+            </ng-container>
+            <div class="expansion" *ngIf="usersService.currentUser.username === null">
+                <mat-accordion>
+                  <mat-expansion-panel *ngIf="!adminAccess.adminLogin">
+                    <mat-expansion-panel-header (click)="onShowLogo()">
+                      <mat-panel-title>
+                        User Sign In
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        <mat-icon>account_circle</mat-icon>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                    <form [formGroup]="usersService.userSignInForm" class="normal-form" (submit)="onUsersLogin()">
+                      <div class="controllers-container">
+                          <mat-form-field>
+                              <input formControlName="username" matInput placeholder="User Name" required>
+                              <mat-error *ngIf="usersService.userSignInForm.controls['username'].errors?.required">This Field Is Mandatory</mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <input formControlName="password" matInput placeholder="Password" required type="password">
+                              <mat-error *ngIf="usersService.userSignInForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div class="button-row">
+                          <button mat-raised-button color="accent" type="submit" [disabled]="usersService.userSignInForm.invalid">Log In</button>
+                      </div>
+                    </form>
+                    <ng-container>
+                        <mat-action-list>
+                            <mat-list-item>
+                                <button
+                                    matTooltipClass="example-tooltip"
+                                    mat-list-item  
+                                    (click)="forgetUserAccess()"
+                                    class="mat-button"
+                                >
+                                <span matLine>Forget Password? Click Here</span>
+                                    <mat-icon>report_problem</mat-icon>
+                                </button>
+                            </mat-list-item>
+                        </mat-action-list>
+                    </ng-container>
+                    <div *ngIf="adminAccess.userForgetPassword">
+                        <h3>Forget Password</h3>
+                        <form [formGroup]="usersService.userForgetPasswordForm" class="normal-form" (submit)="onUsersForgetPassword()" autocomplete="off">
+                            <div class="controllers-container">
+                                <mat-form-field>
+                                    <input formControlName="email" matInput placeholder="Email" required>
+                                    <mat-error *ngIf="usersService.userForgetPasswordForm.controls['email'].errors?.required">This Field Is Mandatory</mat-error>
+                                    <mat-error *ngIf="usersService.userForgetPasswordForm.controls['email'].errors?.email">Please Provide A Valid Email</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="button-row">
+                                <button mat-raised-button color="accent" type="submit" [disabled]="usersService.userForgetPasswordForm.invalid">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                  </mat-expansion-panel>
+                
+                  <mat-expansion-panel *ngIf="adminAccess.adminLogin">
+                    <mat-expansion-panel-header (click)="onShowLogo()">
+                      <mat-panel-title>
+                        Admin Sign In
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        <mat-icon>person_outline</mat-icon>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                    <form [formGroup]="usersService.adminSignInForm" class="normal-form" (submit)="onAdminLogin()">
+                      <div class="controllers-container">
+                          <mat-form-field>
+                              <input formControlName="username" matInput placeholder="User Name" required>
+                              <mat-error *ngIf="usersService.adminSignInForm.controls['username'].errors?.required">This Field Is Mandatory</mat-error>
+                          </mat-form-field>
+                          <mat-form-field>
+                              <input formControlName="password" matInput placeholder="Password" required type="password">
+                              <mat-error *ngIf="usersService.adminSignInForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div class="button-row">
+                          <button mat-raised-button color="accent" type="submit" [disabled]="usersService.adminSignInForm.invalid">Log In</button>
+                      </div>
+                    </form>
+                    <ng-container>
+                        <mat-action-list>
+                            <mat-list-item>
+                                <button
+                                    matTooltipClass="example-tooltip"
+                                    mat-list-item  
+                                    (click)="forgetAdminAccess()"
+                                    class="mat-button"
+                                >
+                                <span matLine>Forget Password? Click Here</span>
+                                    <mat-icon>report_problem</mat-icon>
+                                </button>
+                            </mat-list-item>
+                        </mat-action-list>
+                    </ng-container>
+                    <div *ngIf="adminAccess.adminForgetPassword">
+                        <h3>Forget Password</h3>
+                        <form [formGroup]="usersService.adminForgetPasswordForm" class="normal-form" (submit)="onAdminForgetPassword()" autocomplete="off">
+                            <div class="controllers-container">
+                                <mat-form-field>
+                                    <input formControlName="email" matInput placeholder="Email" required>
+                                    <mat-error *ngIf="usersService.adminForgetPasswordForm.controls['email'].errors?.required">This Field Is Mandatory</mat-error>
+                                    <mat-error *ngIf="usersService.adminForgetPasswordForm.controls['email'].errors?.email">Please Provide A Valid Email</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="button-row">
+                                <button mat-raised-button color="accent" type="submit" [disabled]="usersService.adminForgetPasswordForm.invalid">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+
+    

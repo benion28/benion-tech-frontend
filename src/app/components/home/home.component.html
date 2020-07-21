@@ -1,5 +1,5 @@
 <ng-marquee duration="30">
-  {{ marquee }}
+  {{ marquee }} <a href="https://benion-tech.herokuapp.com/benion-homepage">Click Here To Check Our Users Portal</a>
 </ng-marquee>
 
 <mat-divider></mat-divider>
@@ -17,11 +17,17 @@
           <mat-card-content>
             <ng-container>
               <mat-action-list>
-                <mat-list-item *ngFor="let news of topStoriesNews.topStories">
-                  <div>
-                    <span matLine>{{ news.title }}</span>
-                    <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
-                  </div>
+                <mat-list-item *ngFor="let news of newsService.topStories">
+                  <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
+                  <span matLine>{{ news.title }}</span>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
                 </mat-list-item>
               </mat-action-list>
             </ng-container>
@@ -36,11 +42,17 @@
         <mat-card-content>
           <ng-container>
             <mat-action-list>
-              <mat-list-item *ngFor="let news of entertainmentNews.entertainment">
-                <div>
+              <mat-list-item *ngFor="let news of newsService.entertainment">
+                <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
                   <span matLine>{{ news.title }}</span>
-                  <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
-              </div>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
               </mat-list-item>
             </mat-action-list>
           </ng-container>
@@ -55,11 +67,17 @@
         <mat-card-content>
           <ng-container>
             <mat-action-list>
-              <mat-list-item *ngFor="let news of sportsNews.sports">
-                <div>               
-                    <span matLine>{{ news.title }}</span>
-                  <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
-                </div>
+              <mat-list-item *ngFor="let news of newsService.sports">
+                <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
+                  <span matLine>{{ news.title }}</span>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
               </mat-list-item>
             </mat-action-list>
           </ng-container>
@@ -74,11 +92,17 @@
         <mat-card-content>
           <ng-container>
             <mat-action-list>
-              <mat-list-item *ngFor="let news of technologyNews.technology">
-                <div>
+              <mat-list-item *ngFor="let news of newsService.technology">
+                <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
                   <span matLine>{{ news.title }}</span>
-                  <mat-icon matTooltip="View" matTooltipClass="example-tooltip" mat-list-item (click)="viewNews(news)">menu_book</mat-icon>
-                </div>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
               </mat-list-item>
             </mat-action-list>
           </ng-container>
@@ -94,8 +118,23 @@
     <mat-card-title>Read News</mat-card-title>
     <mat-card-content>
         <ng-container>
+            <p></p>
+            <button
+              class="mat-button"
+              *ngIf="newsOpen.imgSrc !== null"
+              matTooltip="Close News" 
+              matTooltipClass="example-tooltip" 
+              (click)="closeNews()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <p></p>
             <h2>{{ newsOpen.title }}</h2>
+            <hr>
             <h3>{{ newsOpen.details }}</h3>
+            <hr>
+            <div *ngIf="newsOpen.imgSrc !== null" class="news-image">
+              <img [src]="newsOpen.imgSrc" [alt]="newsOpen.title">
+            </div>
         </ng-container>
     </mat-card-content>
 </mat-card>

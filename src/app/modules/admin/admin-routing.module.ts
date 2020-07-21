@@ -4,6 +4,7 @@ import { AdminHomepageComponent } from 'src/app/components/admin-homepage/admin-
 import { AdminContactsComponent } from 'src/app/components/admin-contacts/admin-contacts.component';
 import { AdminNewsComponent } from 'src/app/components/admin-news/admin-news.component';
 import { AdminUsersComponent } from 'src/app/components/admin-users/admin-users.component';
+import { AdminImageGalleryComponent } from 'src/app/components/admin-image-gallery/admin-image-gallery.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,11 @@ const routes: Routes = [
     path: 'admin-users',
     component: AdminUsersComponent,
     data: { title: 'Benion Admin Users' }
+  },
+  {
+    path: 'admin-image-gallery',
+    component: AdminImageGalleryComponent,
+    data: { title: 'Benion Image Gallery' }
   }
 ];
 

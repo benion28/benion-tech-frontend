@@ -33,3 +33,12 @@ mat-radio-group mat-radio-button {
     height: 40px;
     padding: 0px !important;
 }
+
+.new-contact-card img {
+    cursor: pointer;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+

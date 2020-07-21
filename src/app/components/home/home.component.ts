@@ -1,8 +1,4 @@
 import { NewsService } from './../../services/news.service';
-import { TechnologyService } from './../../services/technology.service';
-import { SportsService } from './../../services/sports.service';
-import { EntertainmentService } from './../../services/entertainment.service';
-import { TopStoriesService } from './../../services/top-stories.service';
 import { fadeAnimation } from './../../fade-animations';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -27,6 +23,7 @@ export class HomeComponent implements OnInit {
     {
       $key: 'id1',
       title: 'FIRST NEWS OF THE DAY',
+      imgSrc: '../../../assets/images/technology.jpg',
       details: `
       Manatees have been found as far as 75 kilometres (47 mi) offshore, where there are shallow coastal flats and calm mangrove creeks filled with seagrass. Inland lakes where manatees dwell
       include Lake Volta, the Inner Niger River Delta in Mali, Lake Léré, and Lake de Tréné. Due to fluctuating flow rates and water levels in rivers, some of these permanent lakes serve as refuges for
@@ -45,6 +42,7 @@ export class HomeComponent implements OnInit {
     {
       $key: 'id2',
       title: 'SECOND NEWS OF THE DAY',
+      imgSrc: '../../../assets/images/ict.jpg',
       details: `
       World Manatees have been found as far as 75 kilometres (47 mi) offshore, where there are shallow coastal flats and calm mangrove creeks filled with seagrass. Inland lakes where manatees dwell
       include Lake Volta, the Inner Niger River Delta in Mali, Lake Léré, and Lake de Tréné. Due to fluctuating flow rates and water levels in rivers, some of these permanent lakes serve as refuges for
@@ -69,46 +67,32 @@ export class HomeComponent implements OnInit {
 
   newsOpen = {
     title: 'Zero News',
+    imgSrc: null,
     details: 'No Opened News Yet'
   };
 
-  constructor(
-    public topStoriesNews: TopStoriesService,
-    public entertainmentNews: EntertainmentService,
-    public sportsNews: SportsService,
-    public technologyNews: TechnologyService,
-    public newsService: NewsService,
-  ) {}
+  constructor(public newsService: NewsService) {}
 
   ngOnInit(): void {
-    this.topStoriesNews.getTopStories();
-    this.entertainmentNews.getEntertainment();
-    this.sportsNews.getSports();
-    this.technologyNews.getTechnology();
-
-    this.topStoriesNews.topStories = this.topStoriesNews.topStories.sort();
-    this.entertainmentNews.entertainment = this.entertainmentNews.entertainment.sort();
-    this.sportsNews.sports = this.sportsNews.sports.sort();
-    this.technologyNews.technology = this.technologyNews.technology.sort();
-
-    this.technologyNews.technology.forEach(item => {
-      item.isView = false;
-    });
-    this.topStoriesNews.topStories.forEach(item => {
-      item.isView = false;
-    });
-    this.entertainmentNews.entertainment.forEach(item => {
-      item.isView = false;
-    });
-    this.sportsNews.sports.forEach(item => {
-      item.isView = false;
-    });
+    this.newsService.getTopStories();
+    this.newsService.getEntertainment();
+    this.newsService.getSports();
+    this.newsService.getTechnology();
   }
 
   viewNews(news) {
     this.newsOpen = {
       title: news.title,
+      imgSrc: news.imgSrc,
       details: news.details
+    };
+  }
+
+  closeNews() {
+    this.newsOpen = {
+      title: 'Zero News',
+      imgSrc: null,
+      details: 'No Opened News Yet'
     };
   }
 

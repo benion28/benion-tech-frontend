@@ -1,0 +1,14 @@
+mat-card mat-card-content .news-image img {
+    margin-left: 10%;
+    width: 75%;
+    height: 50%;
+}
+
+ng-marquee a {
+    color: #adff2f;
+    text-decoration: none;
+}
+
+ng-marquee a:visited {
+    color: #e44d59;
+}

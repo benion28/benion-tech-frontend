@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-admin-homepage',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-homepage.component.css']
 })
 export class AdminHomepageComponent implements OnInit {
-
-  constructor() { }
+  constructor(public usersService: UsersService) {}
 
   ngOnInit(): void {
+    this.usersService.getAdminAuthorized().subscribe(
+      data => {
+        this.usersService.checkAuthorization(data);
+      },
+      error => {
+        if (error === 404) {
+          this.usersService.checkAuthentication('error');
+        }
+        if (error) {
+          this.usersService.checkAuthentication('server');
+        }
+      }
+    );
   }
-
 }

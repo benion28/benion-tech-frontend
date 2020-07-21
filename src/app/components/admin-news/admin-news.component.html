@@ -6,23 +6,24 @@
   matTooltipClass="example-tooltip"
   routerLink="/benion-admin"
 >
-  <mat-icon>home</mat-icon>
+  <mat-icon>admim_panel_settings</mat-icon>
 </button>
 
 <mat-tab-group>
   <mat-tab label="Top Stories">
     <mat-card>
       <mat-card-title>{{
-        topStoriesNews.topStoriesForm.controls["$key"].value
+        newsService.topStoriesForm.controls["$key"].value
           ? "Modify An Existing Top Stories News"
           : "Add A Top Stories News"
       }}</mat-card-title>
-      <button mat-button color="accent" (click)="onSortTopStoriesNews()">SORT</button>
+      <button mat-button color="accent" (click)="onSortTopStories()">SORT</button>
       <mat-card-content>
         <form
-          [formGroup]="topStoriesNews.topStoriesForm"
+          [formGroup]="newsService.topStoriesForm"
           class="normal-form"
           (submit)="onSubmitTopStories()"
+          autocomplete="off"
         >
           <input type="hidden" formControlName="$key" />
           <input type="hidden" formControlName="isView" />
@@ -35,7 +36,22 @@
             />
             <mat-error
               *ngIf="
-                topStoriesNews.topStoriesForm.controls['title'].errors
+                newsService.topStoriesForm.controls['title'].errors
+                  ?.required
+              "
+              >This Field Is Mandatory</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              formControlName="imageSrc"
+              matInput
+              placeholder="Add An Image"
+              required
+            />
+            <mat-error
+              *ngIf="
+                newsService.topStoriesForm.controls['imageSrc'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -50,7 +66,7 @@
             ></textarea>
             <mat-error
               *ngIf="
-                topStoriesNews.topStoriesForm.controls['details'].errors
+                newsService.topStoriesForm.controls['details'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -62,10 +78,10 @@
                 mat-raised-button
                 color="accent"
                 type="submit"
-                [disabled]="topStoriesNews.topStoriesForm.invalid"
+                [disabled]="newsService.topStoriesForm.invalid"
               >
                 {{
-                  topStoriesNews.topStoriesForm.controls["$key"].value
+                  newsService.topStoriesForm.controls["$key"].value
                     ? "Update"
                     : "Submit"
                 }}
@@ -75,7 +91,7 @@
         </form>
         <div>
           <mat-action-list>
-            <mat-list-item @fade *ngFor="let news of topStoriesNews.topStories">
+            <mat-list-item @fade *ngFor="let news of newsService.topStories">
               <mat-icon
                 @fade
                 color="warn"
@@ -105,16 +121,17 @@
   <mat-tab label="Sports">
     <mat-card>
       <mat-card-title>{{
-        sportsNews.sportsForm.controls["$key"].value
+        newsService.sportsForm.controls["$key"].value
           ? "Modify An Existing Sports News"
           : "Add A Sports News"
       }}</mat-card-title>
-      <button mat-button color="accent" (click)="onSortSportsNews()">SORT</button>
+      <button mat-button color="accent" (click)="onSortSports()">SORT</button>
       <mat-card-content>
         <form
-          [formGroup]="sportsNews.sportsForm"
+          [formGroup]="newsService.sportsForm"
           class="normal-form"
           (submit)="onSubmitSports()"
+          autocomplete="off"
         >
           <input type="hidden" formControlName="$key" />
           <input type="hidden" formControlName="isView" />
@@ -126,7 +143,19 @@
               required
             />
             <mat-error
-              *ngIf="sportsNews.sportsForm.controls['title'].errors?.required"
+              *ngIf="newsService.sportsForm.controls['title'].errors?.required"
+              >This Field Is Mandatory</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              formControlName="imageSrc"
+              matInput
+              placeholder="Add An Image"
+              required
+            />
+            <mat-error
+              *ngIf="newsService.sportsForm.controls['imageSrc'].errors?.required"
               >This Field Is Mandatory</mat-error
             >
           </mat-form-field>
@@ -139,7 +168,7 @@
             ></textarea>
             <mat-error
               *ngIf="
-              sportsNews.sportsForm.controls['details'].errors
+              newsService.sportsForm.controls['details'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -151,10 +180,10 @@
                 mat-raised-button
                 color="accent"
                 type="submit"
-                [disabled]="sportsNews.sportsForm.invalid"
+                [disabled]="newsService.sportsForm.invalid"
               >
                 {{
-                  sportsNews.sportsForm.controls["$key"].value
+                  newsService.sportsForm.controls["$key"].value
                     ? "Update"
                     : "Submit"
                 }}
@@ -164,7 +193,7 @@
         </form>
         <div>
           <mat-action-list>
-            <mat-list-item @fade *ngFor="let news of sportsNews.sports">
+            <mat-list-item @fade *ngFor="let news of newsService.sports">
               <mat-icon
                 @fade
                 color="warn"
@@ -194,16 +223,17 @@
   <mat-tab label="Entertainment">
     <mat-card>
       <mat-card-title>{{
-        entertainmentNews.entertainmentForm.controls["$key"].value
+        newsService.entertainmentForm.controls["$key"].value
           ? "Modify An Existing Entertainment News"
           : "Add An Entertainment News"
       }}</mat-card-title>
-      <button mat-button color="accent" (click)="onSortEntertainmentNews()">SORT</button>
+      <button mat-button color="accent" (click)="onSortEntertainments()">SORT</button>
       <mat-card-content>
         <form
-          [formGroup]="entertainmentNews.entertainmentForm"
+          [formGroup]="newsService.entertainmentForm"
           class="normal-form"
           (submit)="onSubmitEntertainment()"
+          autocomplete="off"
         >
           <input type="hidden" formControlName="$key" />
           <input type="hidden" formControlName="isView" />
@@ -216,7 +246,22 @@
             />
             <mat-error
               *ngIf="
-                entertainmentNews.entertainmentForm.controls['title'].errors
+                newsService.entertainmentForm.controls['title'].errors
+                  ?.required
+              "
+              >This Field Is Mandatory</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              formControlName="imageSrc"
+              matInput
+              placeholder="Add An Image"
+              required
+            />
+            <mat-error
+              *ngIf="
+                newsService.entertainmentForm.controls['imageSrc'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -231,7 +276,7 @@
             ></textarea>
             <mat-error
               *ngIf="
-                entertainmentNews.entertainmentForm.controls['details'].errors
+                newsService.entertainmentForm.controls['details'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -243,10 +288,10 @@
                 mat-raised-button
                 color="accent"
                 type="submit"
-                [disabled]="entertainmentNews.entertainmentForm.invalid"
+                [disabled]="newsService.entertainmentForm.invalid"
               >
                 {{
-                  entertainmentNews.entertainmentForm.controls["$key"].value
+                  newsService.entertainmentForm.controls["$key"].value
                     ? "Update"
                     : "Submit"
                 }}
@@ -256,7 +301,7 @@
         </form>
         <div>
           <mat-action-list>
-            <mat-list-item @fade *ngFor="let news of entertainmentNews.entertainment">
+            <mat-list-item @fade *ngFor="let news of newsService.entertainment">
               <mat-icon
                 @fade
                 color="warn"
@@ -286,16 +331,17 @@
   <mat-tab label="Technology">
     <mat-card>
       <mat-card-title>{{
-        technologyNews.technologyForm.controls["$key"].value
+        newsService.technologyForm.controls["$key"].value
           ? "Modify An Existing Technology News"
           : "Add A Technology News"
       }}</mat-card-title>
-      <button mat-button color="accent" (click)="onSortTechnologyNews()">SORT</button>
+      <button mat-button color="accent" (click)="onSortTechnologies()">SORT</button>
       <mat-card-content>
         <form
-          [formGroup]="technologyNews.technologyForm"
+          [formGroup]="newsService.technologyForm"
           class="normal-form"
           (submit)="onSubmitTechnology()"
+          autocomplete="off"
         >
           <input type="hidden" formControlName="$key" />
           <input type="hidden" formControlName="isView" />
@@ -308,7 +354,22 @@
             />
             <mat-error
               *ngIf="
-                technologyNews.technologyForm.controls['title'].errors
+                newsService.technologyForm.controls['title'].errors
+                  ?.required
+              "
+              >This Field Is Mandatory</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              formControlName="imageSrc"
+              matInput
+              placeholder="Add An Image"
+              required
+            />
+            <mat-error
+              *ngIf="
+                newsService.technologyForm.controls['imageSrc'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -323,7 +384,7 @@
             ></textarea>
             <mat-error
               *ngIf="
-                technologyNews.technologyForm.controls['details'].errors
+                newsService.technologyForm.controls['details'].errors
                   ?.required
               "
               >This Field Is Mandatory</mat-error
@@ -335,10 +396,10 @@
                 mat-raised-button
                 color="accent"
                 type="submit"
-                [disabled]="technologyNews.technologyForm.invalid"
+                [disabled]="newsService.technologyForm.invalid"
               >
                 {{
-                  technologyNews.technologyForm.controls["$key"].value
+                  newsService.technologyForm.controls["$key"].value
                     ? "Update"
                     : "Submit"
                 }}
@@ -348,7 +409,7 @@
         </form>
         <div>
           <mat-action-list>
-            <mat-list-item @fade *ngFor="let news of technologyNews.technology">
+            <mat-list-item @fade *ngFor="let news of newsService.technology">
               <mat-icon
                 @fade
                 color="warn"

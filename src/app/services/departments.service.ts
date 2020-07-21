@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +8,12 @@ import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 export class DepartmentsService {
   departmentList: AngularFireList<any>;
   array = [];
+  nameValue = {
+    name: null
+  };
 
   constructor(private firebase: AngularFireDatabase) {
-    this.departmentList = this.firebase.list('departments');
-    this.departmentList.snapshotChanges().subscribe(list => {
+    this.getDepartments().subscribe(list => {
       this.array = list.map(item => {
         return {
           $key: item.key,
@@ -70,13 +72,23 @@ export class DepartmentsService {
   ];
 
   getDepartmentName($key) {
-    const name = 'name';
     if ($key === '0') {
       return '';
     } else {
-      return _.find(this.array, object => {
-        return object.$key === $key;
-      });
+      return this.returnDepartmentName($key);
     }
   }
+
+  returnDepartmentName(key) {
+    const name = 'name';
+    return _.find(this.array, object => {
+      return object.$key === key;
+    });
+  }
+
+  getDepartments() {
+    this.departmentList = this.firebase.list('departments');
+    return this.departmentList.snapshotChanges();
+  }
 }
+
