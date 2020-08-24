@@ -42,3 +42,6 @@ mat-radio-group mat-radio-button {
     border-radius: 50%;
 }
 
+.form-group input {
+    cursor: pointer;
+}

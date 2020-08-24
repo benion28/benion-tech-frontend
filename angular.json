@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Benion-Tech"
+    }
+  },
+  "defaultProject": "Benion-Tech",
+  "cli": {
+    "analytics": "356909ad-8f5f-478f-b077-61c29824e040"
+  }
 }

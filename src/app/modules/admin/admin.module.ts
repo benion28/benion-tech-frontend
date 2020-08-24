@@ -29,6 +29,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminUsersComponent } from 'src/app/components/admin-users/admin-users.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -71,7 +72,8 @@ import { AdminImageGalleryComponent } from 'src/app/components/admin-image-galle
     MatTooltipModule,
     MatListModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressBarModule
   ]
 })
 export class AdminModule {}

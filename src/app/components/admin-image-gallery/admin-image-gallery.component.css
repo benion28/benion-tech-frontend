@@ -76,4 +76,11 @@
     display: block;
 }
 
+.progress-bar {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
 
+.form-group input {
+    cursor: pointer;
+}

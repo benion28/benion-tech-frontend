@@ -61,6 +61,11 @@
                     <button mat-icon-button color="warn" matTooltip="Delete" matTooltipClass="example-tooltip" (click)="onDeleteLoginUser(row)"><mat-icon>delete_outline</mat-icon></button>
                   </mat-cell>
               </ng-container>
+              <ng-container matColumnDef="loading-bar">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </mat-footer-cell>
+              </ng-container>
               <ng-container matColumnDef="loading">
                   <mat-footer-cell *matFooterCellDef colspan="6">
                       Please Wait, Data Is Loading......
@@ -78,9 +83,10 @@
               </ng-container>
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['loading-bar']" [ngClass]="{ 'hide':listDataLogin!=null }"></mat-footer-row>
               <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{ 'hide':listDataLogin!=null }"></mat-footer-row>
               <mat-footer-row *matFooterRowDef="[ 'noData' ]" [ngClass]="{ 'hide':!(listDataLogin!=null && listDataLogin.data.length===0) }"></mat-footer-row>
-          <mat-footer-row *matFooterRowDef="['totalLoginUsers']"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['totalLoginUsers']" [ngClass]="{ 'hide':listDataLogin==null }"></mat-footer-row>
           </mat-table>
           <mat-paginator [pageSizeOptions]="[ 5, 10, 25, 50, 75, 100]" [pageSize]="20" showFirstLastButtons></mat-paginator>
       </div>
@@ -136,6 +142,11 @@
                     <button mat-icon-button color="warn" matTooltip="Delete" matTooltipClass="example-tooltip" (click)="onDeleteAdminUser(row)"><mat-icon>delete_outline</mat-icon></button>
                   </mat-cell>
               </ng-container>
+              <ng-container matColumnDef="loading-bar">
+                  <mat-footer-cell *matFooterCellDef colspan="6">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </mat-footer-cell>
+              </ng-container>
               <ng-container matColumnDef="loading">
                   <mat-footer-cell *matFooterCellDef colspan="6">
                       Please Wait, Data Is Loading......
@@ -153,9 +164,10 @@
               </ng-container>
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row *matFooterRowDef="['loading-bar']" [ngClass]="{ 'hide':listDataAdmin!=null }"></mat-footer-row>
               <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{ 'hide':listDataAdmin!=null }"></mat-footer-row>
               <mat-footer-row *matFooterRowDef="[ 'noData' ]" [ngClass]="{ 'hide':!(listDataAdmin!=null && listDataAdmin.data.length===0) }"></mat-footer-row>
-          <mat-footer-row *matFooterRowDef="['totalAdminUsers']"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['totalAdminUsers']" [ngClass]="{ 'hide':listDataLogin==null }"></mat-footer-row>
           </mat-table>
           <mat-paginator [pageSizeOptions]="[ 5, 10, 25, 50, 75, 100]" [pageSize]="20" showFirstLastButtons></mat-paginator>
       </div>

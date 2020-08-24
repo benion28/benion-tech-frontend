@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { finalize } from 'rxjs/operators';
 import { ContactsService } from './contacts.service';
 import { NotificationsService } from './notifications.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class ImagesService {
   othersImages = [];
   worksImages = [];
   contactsImages = [];
+
+  task: AngularFireUploadTask;
+  progressPercentage: Observable<number>;
 
   galleryImagesList: AngularFireList<any>;
 
@@ -125,7 +129,12 @@ export class ImagesService {
   uploadGalleryImage(details, imageSrc) {
     const filePath = `${ details.category }/${ details.caption }_${ new Date().getTime() }`;
     const fileRef = this.storage.ref(filePath);
-    this.storage.upload(filePath, imageSrc).snapshotChanges().pipe(
+    // Main Task
+    this.task = this.storage.upload(filePath, imageSrc);
+    // Progress Monitoring
+    this.progressPercentage = this.task.percentageChanges();
+    // Upload Photo
+    this.task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(url => {
           details.image = url;
@@ -133,6 +142,7 @@ export class ImagesService {
           this.galleryImagesForm.reset();
           this.initializeGalleryImagesForm();
           this.notificationsService.success(':: Has Been Uploaded Successfully ::');
+          this.progressPercentage = null;
         });
       })
     ).subscribe();
