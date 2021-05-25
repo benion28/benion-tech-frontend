@@ -1,0 +1,349 @@
+<div class="sidebar">
+  <mat-nav-list>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="20px"
+      class="date-time"
+    >
+      <mat-action-list fxFlex="20" *ngFor="let date of timeService.getDate">
+        <mat-list-item>
+          <h1 align="center">{{ date.hour }}:{{ date.minute }}</h1>
+        </mat-list-item>
+      </mat-action-list>
+      <mat-action-list fxFlex="30" *ngFor="let date of timeService.getDate">
+        <mat-list-item>
+          <h2 align="center">{{ date.week }}</h2>
+        </mat-list-item>
+      </mat-action-list>
+      <mat-action-list fxFlex="50" *ngFor="let date of timeService.getDate">
+        <mat-list-item>
+          <h5 align="center">
+            {{ date.day }} {{ date.month }}, {{ date.year }}
+          </h5>
+        </mat-list-item>
+      </mat-action-list>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profile-card">
+      <div class="header">
+        <h2>Bernard Iorver</h2>
+        <h4>Benion</h4>
+      </div>
+      <img src="https://firebasestorage.googleapis.com/v0/b/benion-database.appspot.com/o/Contacts%2Fbernard-benion-iorver_1594825437082?alt=media&token=12f19e41-6bab-4b97-9e1e-6728408babc3" alt="Bernard Iorver" />
+    </div>
+    <mat-divider></mat-divider>
+    <div class="pages">
+      <h2 matSubheader>Pages</h2>
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/home"
+        ><span fxFlex fxFlexAlign="flex-end">Home</span>
+        <mat-icon>home</mat-icon></a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="list-item-active"
+        routerLink="/contacts"
+        ><span fxFlex fxFlexAlign="flex-end">Contacts</span>
+        <mat-icon>people_alt</mat-icon></a
+      >
+      <a mat-list-item routerLinkActive="list-item-active" routerLink="/works"
+        ><span fxFlex fxFlexAlign="flex-end">My Works</span>
+        <mat-icon>category</mat-icon></a
+      >
+      <a
+        mat-list-item
+        routerLinkActive="list-item-active"
+        routerLink="/about-me"
+        ><span fxFlex fxFlexAlign="flex-end">About Me</span>
+        <mat-icon>info</mat-icon></a
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <div class="tools">
+      <h2 matSubheader>Tools</h2>
+      <a mat-list-item href="https://benion-tech.herokuapp.com/benion-homepage/"
+        ><span fxFlex fxFlexAlign="flex-end">User HomePage</span>
+        <mat-icon>new_releases</mat-icon></a
+      >
+      <div *ngIf="usersService.currentUser.username === null" class="expansion">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                User Sign In
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.userSignInForm" class="normal-form" (submit)="onUsersLogin()">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <input formControlName="username" matInput placeholder="User Name" required>
+                      <mat-error *ngIf="usersService.userSignInForm.controls['username'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input formControlName="password" matInput placeholder="Password" required type="password">
+                      <mat-error *ngIf="usersService.userSignInForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.userSignInForm.invalid">Log In</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Admin Sign In
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.adminSignInForm" class="normal-form" (submit)="onAdminLogin()">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <input formControlName="username" matInput placeholder="User Name" required>
+                      <mat-error *ngIf="usersService.adminSignInForm.controls['username'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input formControlName="password" matInput placeholder="Password" required type="password">
+                      <mat-error *ngIf="usersService.adminSignInForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.adminSignInForm.invalid">Log In</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="usersService.adminUser.username !== null">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Activate Log In User
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.activateUserForm" class="normal-form" (submit)="onActivateUser()" autocomplete="off">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.activateUserForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.activateUserForm.invalid">Activate</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        
+          <mat-expansion-panel *ngIf="usersService.adminUser.username !== null">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Change User Password
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.userChangePasswordForm" class="normal-form" (submit)="onChangeUserPassword()">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.userChangePasswordForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input formControlName="password" matInput placeholder="New Password" required type="password">
+                      <mat-error *ngIf="usersService.userChangePasswordForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                      <mat-error *ngIf="usersService.userChangePasswordForm.controls['password'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.userChangePasswordForm.invalid">Change Password</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel *ngIf="usersService.adminUser.username !== null">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Activate Admin User
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.activateAdminForm" class="normal-form" (submit)="onActivateAdmin()" autocomplete="off">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.activateAdminForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.activateAdminForm.invalid">Activate</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        
+          <mat-expansion-panel *ngIf="usersService.adminUser.username !== null">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Change Admin Password
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.adminChangePasswordForm" class="normal-form" (submit)="onChangeAdminPassword()">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.adminChangePasswordForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input formControlName="password" matInput placeholder="New Password" required type="password">
+                      <mat-error *ngIf="usersService.adminChangePasswordForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                      <mat-error *ngIf="usersService.adminChangePasswordForm.controls['password'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.adminChangePasswordForm.invalid">Change Password</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div *ngIf="usersService.adminUser.username !== null" class="expansion">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Activate Log In User
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.activateUserForm" class="normal-form" (submit)="onActivateUser()" autocomplete="off">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.activateUserForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.activateUserForm.invalid">Activate</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Change User Password
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.userChangePasswordForm" class="normal-form" (submit)="onChangeUserPassword()">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.userChangePasswordForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input formControlName="password" matInput placeholder="New Password" required type="password">
+                      <mat-error *ngIf="usersService.userChangePasswordForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                      <mat-error *ngIf="usersService.userChangePasswordForm.controls['password'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.userChangePasswordForm.invalid">Change Password</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Activate Admin User
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.activateAdminForm" class="normal-form" (submit)="onActivateAdmin()" autocomplete="off">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.activateAdminForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.activateAdminForm.invalid">Activate</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Change Admin Password
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form [formGroup]="usersService.adminChangePasswordForm" class="normal-form" (submit)="onChangeAdminPassword()">
+              <div class="controllers-container">
+                  <mat-form-field>
+                      <textarea formControlName="token" matInput cols="30" rows="10" placeholder="Token" required></textarea>
+                      <mat-error *ngIf="usersService.adminChangePasswordForm.controls['token'].errors?.required">This Field Is Mandatory</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input formControlName="password" matInput placeholder="New Password" required type="password">
+                      <mat-error *ngIf="usersService.adminChangePasswordForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                      <mat-error *ngIf="usersService.adminChangePasswordForm.controls['password'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="button-row">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="usersService.adminChangePasswordForm.invalid">Change Password</button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <button
+        *ngIf="usersService.currentUser.username === null"
+        mat-list-item  
+        (click)="onCreate()"
+        class="mat-button"
+      >
+        <span>Create An Account</span>
+        <mat-icon>add_box</mat-icon>
+      </button>
+      <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin">
+          <button mat-menu-item>
+            <mat-icon>spa</mat-icon>
+            Admin Home
+          </button>
+        </a>
+    </div>
+  </mat-nav-list>
+</div>

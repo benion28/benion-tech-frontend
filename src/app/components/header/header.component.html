@@ -1,0 +1,100 @@
+<div class="header">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button
+        class="sidenav-button"
+        mat-icon-button
+        (click)="onSidebartoggle()"
+        matTooltip="Menu"
+        matTooltipClass="example-tooltip"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="ascent"
+        class="mat-button"
+        matTooltip="Home"
+        matTooltipClass="example-tooltip"
+        routerLink="/home"
+      >
+        <mat-icon>home</mat-icon>
+      </button>
+      <div class="banner">
+        <a routerLink="/home" matTooltip="Home" matTooltipClass="example-tooltip"><img src="https://firebasestorage.googleapis.com/v0/b/benion-database.appspot.com/o/Others%2Fbenion-tech-banner_1594856868867?alt=media&token=2a58cc8e-02ce-412f-86f5-a506e2d9fe3f" width="150" height="40" loading="lazy"></a>
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <mat-action-list fxLayout="row" fxGap="20px">
+          <mat-list-item *ngFor="let date of timeService.getDate">
+            <h1>{{ date.hour }}:{{ date.minute }}:{{ date.second }}</h1>
+          </mat-list-item>
+        </mat-action-list>
+        <button
+          mat-icon-button
+          class="sidenav-button"
+          [matMenuTriggerFor]="menu"
+          matTooltip="User's Menu"
+          matTooltipClass="example-tooltip"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <mat-card>
+            <mat-card-title>{{ usersService.currentUser.username !== null  ? usersService.currentUser.username : "User"}}'s Menu</mat-card-title>
+            <mat-card-content> </mat-card-content>
+            <mat-card-actions>
+              <button
+               *ngIf="usersService.currentUser.username === null"
+                mat-menu-item
+                (click)="onCreate()"
+              >
+                <span>Create An Account</span>
+                <mat-icon>add_box</mat-icon>
+              </button>
+              <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin/admin-contacts">
+                <button mat-menu-item>
+                  <mat-icon>spa</mat-icon>
+                  Admin Contacts
+                </button>
+              </a>
+              <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin">
+                <button mat-menu-item>
+                  <mat-icon>spa</mat-icon>
+                  Admin Home
+                </button>
+              </a>
+              <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin/admin-users">
+                <button mat-menu-item>
+                  <mat-icon>group</mat-icon>
+                  Admin Users
+                </button>
+              </a>
+              <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin/admin-news">
+                <button mat-menu-item>
+                  <mat-icon>public</mat-icon>
+                  Admin News
+                </button>
+              </a>
+              <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin/admin-google-map">
+                <button mat-menu-item>
+                  <mat-icon>map</mat-icon>
+                  Admin Google Map
+                </button>
+              </a>
+              <a *ngIf="usersService.adminUser.username !== null" routerLink="/benion-admin/admin-image-gallery">
+                <button mat-menu-item>
+                  <mat-icon>image</mat-icon>
+                  Admin Image Gallery
+                </button>
+              </a>
+              <button *ngIf="usersService.currentUser.username !== null" mat-menu-item (click)="onSignOut()">
+                <mat-icon>exit_to_app</mat-icon>
+                Sign Out
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

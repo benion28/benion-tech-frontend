@@ -1,0 +1,48 @@
+mat-tab .container {
+    max-width: 600px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.card {
+    cursor: pointer;
+    background-color: transparent;
+    height: 350px;
+	margin: auto;
+    border-radius: 10px;
+    perspective: 1000px;
+}
+
+.card img {
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-inner {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    transform: rotateY(180deg);
+}

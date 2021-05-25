@@ -1,0 +1,15 @@
+<div class="select-actions">
+  <h1>{{ mapControl.title }}</h1>
+  <button mat-button color="accent" routerLink="/benion-admin/admin-google-map">GOTO COORDINATES LIST</button>
+</div>
+
+<agm-map [latitude]="mapControl.latitude" [longitude]="mapControl.longitude" [zoom]="mapControl.zoom">
+  <agm-marker
+    *ngFor="let point of coordinates" 
+    [latitude]="point.latitude" 
+    [longitude]="point.longitude" 
+    [iconUrl]="checkCategory(point.category)"
+    [matTooltip]="point.title" 
+    matTooltipClass="example-tooltip">
+  </agm-marker>
+</agm-map>

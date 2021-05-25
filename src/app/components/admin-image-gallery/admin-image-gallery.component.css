@@ -1,0 +1,86 @@
+.add-bottom-padding .gallery-button {
+    margin-left: 40%;
+}
+
+.normal-form {
+    align-items: center;
+}
+
+.upload-image-container {
+    width: 400px;
+    margin: auto;
+}
+
+.upload-image-container .full-width {
+    width: 100%;
+}
+
+.new-image-card img {
+    cursor: pointer;
+    width: 95%;
+    height: 300px;
+    border: 5pt solid #5c0a5c;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.new-contact-card img {
+    cursor: pointer;
+    width: 95%;
+    height: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gallery-container  {
+	width: 500px;
+    margin: auto;
+}
+
+.gallery-container .mat-card-container {
+	width: 97%;
+    margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.contact-gallery-image {
+    align-items: center;
+}
+
+.contact-gallery-image  img {
+    width: 80%;
+    height: 350px;
+    border: 5pt solid #5c0a5c;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+	margin-left: 20px;
+}
+
+.gallery-image img {
+    width: 95%;
+    height: 300px;
+    border: 5pt solid #5c0a5c;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gallery-container mat-card mat-card-actions button {
+    display: none;
+}
+
+.gallery-container mat-card:hover mat-card-actions button {
+    display: block;
+}
+
+.progress-bar {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    cursor: pointer;
+}

@@ -1,0 +1,123 @@
+<button
+  mat-icon-button
+  color="accent"
+  class="mat-button"
+  matTooltip="Admin Home"
+  matTooltipClass="example-tooltip"
+  routerLink="/benion-admin"
+>
+  <mat-icon>admim_panel_settings</mat-icon>
+</button>
+ 
+<mat-tab-group>
+    <mat-tab label="Upload Image">
+        <mat-card class="upload-image-container">
+            <mat-card-title>
+                Upload An Image To Gallery
+            </mat-card-title>
+            <mat-card-content>
+                <form
+                [formGroup]="imagesService.galleryImagesForm"
+                class="normal-form"
+                (submit)="onSubmit()"
+                autocomplete="off"
+                >
+                <input type="hidden" formControlName="$key" />
+                    <div *ngIf="images.image !== null" class="new-image-card">
+                        <img [src]="images.image" alt="Contact Image" matTooltip="Click To Select Image" matTooltipClass="example-tooltip" (click)="fileUploader.click()" />
+                    </div>
+                    <div *ngIf="images.image === null" class="new-contact-card">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/benion-database.appspot.com/o/Others%2Fadd_photo_1594791320106?alt=media&token=c85f2ec7-ce78-451d-b3b9-4fe64d91014e" alt="Contact Icon" matTooltip="Click To Select Image" matTooltipClass="example-tooltip" (click)="fileUploader.click()" />
+                    </div>
+                    <div class="form-group">
+                        <label>Select An Image To Upload</label>
+                        <input formControlName="image" class="form-control" #fileUploader required type="file" accept="image/*" (change)="showPreview($event)">
+                        <mat-error *ngIf="imagesService.galleryImagesForm.controls['image'].errors?.required">This Photo Is Required</mat-error>
+                    </div>
+                <mat-form-field class="full-width">
+                    <input
+                    formControlName="caption"
+                    matInput
+                    placeholder="Add A Caption"
+                    required
+                    />
+                    <mat-error
+                    *ngIf="
+                        imagesService.galleryImagesForm.controls['caption'].errors
+                        ?.required
+                    "
+                    >This Field Is Mandatory</mat-error
+                    >
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input
+                    formControlName="link"
+                    matInput
+                    placeholder="Add A Link"
+                    />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select formControlName="category" placeholder="Category" >
+                        <mat-option value="Works">Works</mat-option>
+                        <mat-option selected value="Others">Others</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div *ngIf="imagesService.progressPercentage != null" class="progress-bar">
+                    <mat-progress-bar mode="determinate" value="(imagesService.progressPercentage | async) ? (imagesService.progressPercentage | async) : 0" color="accent"></mat-progress-bar>
+                    <small>Uploading Photo ({{ (imagesService.progressPercentage | async) ? (imagesService.progressPercentage | async) : 0 }}%)...</small>
+                </div>
+                <div class="add-bottom-padding">
+                    <div class="gallery-button">
+                    <button
+                        mat-raised-button
+                        color="accent"
+                        type="submit"
+                        [disabled]="imagesService.galleryImagesForm.invalid"
+                    >
+                        Upload Photo
+                    </button>
+                    </div>
+                </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Contacts Gallery">
+        <div *ngFor="let details of imagesService.contactsImages" class="gallery-container">
+            <mat-card>
+                <mat-card-title>{{ details.firstname }} {{ details.lastname }}</mat-card-title>
+                <mat-card-content class="contact-gallery-image">
+                    <img [src]="details.image">
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Works Gallery">
+        <div *ngFor="let details of imagesService.worksImages" class="gallery-container">
+            <mat-card>
+                <mat-card-title>{{ details.caption }} ({{ details.category }})</mat-card-title>
+                <mat-card-content class="gallery-image">
+                    <img [src]="details.image">
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-icon-button color="warn" matTooltip="Delete Photo" matTooltipClass="example-tooltip" (click)="onDelete(details.$key)">Delete Photo <mat-icon>delete_outline</mat-icon></button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Others Gallery">
+        <div *ngFor="let details of imagesService.othersImages" class="gallery-container">
+            <mat-card class="mat-card-container">
+                <mat-card-title>{{ details.caption }} ({{ details.category }})</mat-card-title>
+                <mat-card-content class="gallery-image">
+                    <img [src]="details.image" class="contact-image">
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-icon-button color="warn" matTooltip="Delete Photo" matTooltipClass="example-tooltip" (click)="onDelete(details.$key)">Delete Photo <mat-icon>delete_outline</mat-icon></button>
+                </mat-card-actions>
+            </mat-card>
+			<h1> </h1>
+			<hr>
+        </div>
+    </mat-tab>
+</mat-tab-group>

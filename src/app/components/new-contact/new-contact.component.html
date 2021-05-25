@@ -1,0 +1,101 @@
+<mat-toolbar>
+    <span>{{ contactsService.contactForm.controls['$key'].value?"Modify An Existing Contact":"Create A New Contact" }}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="button-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+    
+<form [formGroup]="contactsService.contactForm" class="normal-form" (submit)="onSubmit()" autocomplete="off">
+    <mat-grid-list cols="3" rowHeight="400px">
+        <mat-grid-tile>
+            <div class="controllers-container">
+                <input type="hidden" formControlName="$key">
+                <div *ngIf="images.image !== null" class="new-contact-card">
+                    <img [src]="images.image" alt="Contact Image" matTooltip="Click To Select Image" matTooltipClass="example-tooltip" (click)="fileUploader.click()" />
+                </div>
+                <div *ngIf="images.image === null" class="new-contact-card">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/benion-database.appspot.com/o/Others%2Fadd_photo_1594791320106?alt=media&token=c85f2ec7-ce78-451d-b3b9-4fe64d91014e" alt="Contact Icon" matTooltip="Click To Select Image" matTooltipClass="example-tooltip" (click)="fileUploader.click()" />
+                </div>
+                <div class="form-group">
+                    <label>Upload Profile Image</label>
+                    <input formControlName="image" class="form-control" #fileUploader type="file" accept="image/*" (change)="showPreview($event)">
+                </div>
+                <mat-form-field>
+                    <input formControlName="firstName" matInput placeholder="First Name" required>
+                    <mat-error *ngIf="contactsService.contactForm.controls['firstName'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="contactsService.contactForm.controls['firstName'].errors?.maxlength">Characters Should Not Be More Than 10</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="controllers-container">
+                <mat-form-field>
+                    <input formControlName="lastName" matInput placeholder="Last Name" required>
+                    <mat-error *ngIf="contactsService.contactForm.controls['lastName'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="contactsService.contactForm.controls['lastName'].errors?.maxlength">Characters Should Not Be More Than 10</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="userName" matInput placeholder="User Name" required>
+                    <mat-error *ngIf="contactsService.contactForm.controls['userName'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="contactsService.contactForm.controls['userName'].errors?.maxlength">Characters Should Not Be More Than 10</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="email" matInput placeholder="Email Address" required>
+                    <mat-error *ngIf="contactsService.contactForm.controls['email'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="contactsService.contactForm.controls['email'].errors?.email">Please Provide A Valid Email</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="number" formControlName="mobile" matInput placeholder="Mobile No" required>
+                    <mat-error *ngIf="contactsService.contactForm.controls['mobile'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="contactsService.contactForm.controls['mobile'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="password" matInput placeholder="Password" required type="password">
+                    <mat-error *ngIf="contactsService.contactForm.controls['password'].errors?.required">This Field Is Mandatory</mat-error>
+                    <mat-error *ngIf="contactsService.contactForm.controls['password'].errors?.minlength">Characters Should Not Be Less Than 8</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="controllers-container">
+                <mat-form-field>
+                    <input formControlName="city" matInput placeholder="City">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="school" matInput placeholder="School" required>
+                    <mat-error>This Field Is Mandatory</mat-error>
+                </mat-form-field>
+                <div class="add-bottom-padding">
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="g0">Male</mat-radio-button>
+                        <mat-radio-button value="g1">Female</mat-radio-button>
+                        <mat-radio-button value="g2">Others</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <mat-form-field>
+                    <mat-select formControlName="department" placeholder="Department" >
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let department of departmentsService.array">
+                            <mat-option value="{{ department.$key}} ">{{ department.code }} -- {{ department.name }}</mat-option>
+                        </ng-container>
+                        <!-- <ng-container *ngFor="let department of departmentsService.departments">
+                            <mat-option value="{{ department.id}}">{{ department.code }} -- {{ department.name }}</mat-option>
+                        </ng-container> -->
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="birthday" matInput [matDatepicker]="picker" placeholder="Birthday" required>
+                    <mat-error>Please Provide A Valid Date (mm/dd/yyyy)</mat-error>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="add-bottom-padding">
+                    <mat-checkbox formControlName="isWorking">Have A Job</mat-checkbox>
+                </div>
+                <div class="button-row">
+                    <button mat-raised-button color="accent" type="submit" [disabled]="contactsService.contactForm.invalid">{{ contactsService.contactForm.controls['$key'].value?"Update":"Submit" }}</button>
+                    <button mat-raised-button color="warn" (click)="onClear()">Reset</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

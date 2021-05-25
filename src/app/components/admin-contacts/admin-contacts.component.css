@@ -1,0 +1,25 @@
+.hide {
+    display: none;
+}
+
+mat-footer-row mat-footer-cell {
+    justify-content: center;
+    font-style: italic; 
+}
+
+mat-header-row:hover {
+    background: #7d3c28;
+}
+
+mat-header-row:active {
+    background: #4caf50;
+}
+
+mat-row:hover {
+    background: #7d3c28;
+}
+
+mat-row:active {
+    background: #4caf50;
+}
+

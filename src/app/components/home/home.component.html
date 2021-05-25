@@ -1,0 +1,140 @@
+<ng-marquee duration="30">
+  {{ marquee }} <a href="/benion-homepage">Click Here To Check Our Users Portal</a>
+</ng-marquee>
+
+<mat-divider></mat-divider>
+
+<div class="home-image">
+    <app-images></app-images>
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-tab-group>
+  <mat-tab label="Top Stories">
+        <mat-card>
+          <mat-card-title>Top Stories</mat-card-title>
+          <mat-card-content>
+            <ng-container>
+              <mat-action-list>
+                <mat-list-item *ngFor="let news of newsService.topStories">
+                  <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
+                  <span matLine>{{ news.title }}</span>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
+                </mat-list-item>
+              </mat-action-list>
+            </ng-container>
+          </mat-card-content>
+          <mat-card-actions></mat-card-actions>
+        </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Entertainment">
+    <mat-card>
+        <mat-card-title>Entertainment</mat-card-title>
+        <mat-card-content>
+          <ng-container>
+            <mat-action-list>
+              <mat-list-item *ngFor="let news of newsService.entertainment">
+                <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
+                  <span matLine>{{ news.title }}</span>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
+              </mat-list-item>
+            </mat-action-list>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Sports">
+    <mat-card>
+        <mat-card-title>Sport</mat-card-title>
+        <mat-card-content>
+          <ng-container>
+            <mat-action-list>
+              <mat-list-item *ngFor="let news of newsService.sports">
+                <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
+                  <span matLine>{{ news.title }}</span>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
+              </mat-list-item>
+            </mat-action-list>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Technology">
+    <mat-card>
+        <mat-card-title>Technology</mat-card-title>
+        <mat-card-content>
+          <ng-container>
+            <mat-action-list>
+              <mat-list-item *ngFor="let news of newsService.technology">
+                <button
+                    matTooltip="View" 
+                    matTooltipClass="example-tooltip"
+                    mat-list-item  
+                    (click)="viewNews(news)"
+                    class="mat-button"
+                  >
+                  <span matLine>{{ news.title }}</span>
+                    <mat-icon>menu_book</mat-icon>
+                </button>
+              </mat-list-item>
+            </mat-action-list>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+  </mat-tab>
+</mat-tab-group>
+
+<mat-divider></mat-divider>
+
+<mat-card>
+    <mat-card-title>Read News</mat-card-title>
+    <mat-card-content>
+        <ng-container>
+            <p></p>
+            <button
+              class="mat-button"
+              *ngIf="newsOpen.imgSrc !== null"
+              matTooltip="Close News" 
+              matTooltipClass="example-tooltip" 
+              (click)="closeNews()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <p></p>
+            <h2>{{ newsOpen.title }}</h2>
+            <hr>
+            <h3>{{ newsOpen.details }}</h3>
+            <hr>
+            <div *ngIf="newsOpen.imgSrc !== null" class="news-image">
+              <img [src]="newsOpen.imgSrc" [alt]="newsOpen.title">
+            </div>
+        </ng-container>
+    </mat-card-content>
+</mat-card>

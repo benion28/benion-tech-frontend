@@ -1,0 +1,13 @@
+mat-card img{
+  margin-left: 10%;
+  width: 80%;
+  height: 70%;
+}
+
+mat-card-actions .first-group {
+  margin-bottom: 3vh;
+}
+
+mat-card-actions .second-group {
+  margin-top: 3vh;
+}

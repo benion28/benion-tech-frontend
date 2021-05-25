@@ -1,0 +1,108 @@
+<mat-tab-group>
+  <mat-tab label="Contacts List">
+    <div class="order-actions">
+      <button mat-button color="accent">DELETE</button>
+      <button mat-button color="accent">ARCHIVE</button>
+    </div>
+    <div class="order-container">
+      <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="selectAll()"></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-checkbox [checked]="element.isWorking"></mat-checkbox>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="$key">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>#ID</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.$key }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.firstName }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.lastName }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="departmentName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.departmentName }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.city }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef>
+            Total Contacts Are {{ totalContacts }}
+          </td>
+        </ng-container>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr
+          mat-footer-row
+          *matFooterRowDef="displayedColumns; sticky: true"
+        ></tr>
+      </table>
+    </div>
+
+    <mat-paginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+  </mat-tab>
+
+  <mat-tab label="Contacts Card">
+    <div class="container">
+      <div *ngFor="let detail of contactsData" class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <img [src]="detail.image" [alt]="detail.userName"/>
+            </div>
+            <div class="card-back">
+                <mat-action-list>
+                  <mat-list-item> 
+                    <span matLine>First Name: {{ detail.firstName }}</span>
+                  </mat-list-item>
+                  <mat-list-item> 
+                    <span matLine>Last Name: {{ detail.lastName }}</span>
+                  </mat-list-item>
+                  <mat-list-item> 
+                    <span matLine>Nickname: {{ detail.userName }}</span>
+                  </mat-list-item>
+                  <mat-list-item> 
+                    <span matLine>School: {{ detail.school }}</span>
+                  </mat-list-item>
+                  <mat-list-item> 
+                    <span matLine>Department: {{ detail.departmentName }}</span>
+                  </mat-list-item>
+                  <mat-list-item> 
+                    <span matLine>City: {{ detail.city }}</span>
+                  </mat-list-item>
+              </mat-action-list>
+            </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,22 @@
+mat-card {
+	height: 100%;
+	width: 100%;
+}
+
+mat-card-title {
+    text-align: center;
+    color: #ffffff;
+}
+
+mat-card-content h3 {
+    text-align: center;
+    background-color: #d38383;
+	font-size: 20pt;
+    color: #ffffff;
+}
+
+mat-card-content h1 {
+    text-align: center;
+	font-size: 60pt;
+    color: #ffffff;
+}

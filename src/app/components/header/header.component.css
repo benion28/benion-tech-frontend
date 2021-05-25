@@ -1,0 +1,134 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.container .mat-drawer {
+  width: 220px;
+}
+
+.container .mat-drawer .mat-button {
+  display: block;
+  width: 30%;
+  text-align: center;
+  text-decoration-color: green;
+  cursor: pointer;
+  height: 5vh;
+}
+
+.container .sidenav-content .sidenav-button {
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.search-div {
+  margin: 10px;
+}
+
+.search-form-field {
+  width: 60%;
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.search-form-field div.mat-form-field-underline {
+  display: none;
+}
+
+.search-form-field div.mat-form-field-infix {
+  border-top: 0px;
+}
+
+.search-form-field div.mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+.search-form-field div.mat-form-field-suffix button {
+  height: 32px;
+  width: 32px;
+}
+
+.login-form {
+  font-size: 12pt;
+}
+mat-form-field {
+  width: 100%;
+}
+
+mat-card-title {
+  position: absolute;
+  top: 3%;
+  left: 5%;
+}
+
+mat-card mat-card-actions a {
+  text-decoration: none;
+}
+
+.menu-span {
+  align-items: center;
+  text-align: center;
+  font-size: 13pt;
+}
+
+.mat-card-image {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.bottom-toolbar {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  height: 35vh;
+}
+
+.bottom-toolbar .card-bottom-image {
+  left: 2%;
+  left: 20%;
+  border-radius: 50%;
+  width: 10em;
+  height: 23vh;
+}
+
+.bottom-toolbar .card-bottom-title {
+  position: absolute;
+  left: 40%;
+}
+
+.bottom-toolbar .card-bottom-actions .first-div {
+  position: absolute;
+  left: 30%;
+  top: 10%;
+}
+
+.bottom-toolbar .card-bottom-actions .second-div {
+  position: absolute;
+  left: 85%;
+  top: 15%;
+}
+
+.bottom-toolbar .center {
+  position: absolute;
+  left: 6%;
+}
+
+.bottom-toolbar .card-bottom-span {
+  position: absolute;
+  left: 3%;
+  font-size: 14pt;
+}
+
+.banner {
+  margin-left: 20pt;
+}

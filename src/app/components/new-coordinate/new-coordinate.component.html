@@ -1,0 +1,90 @@
+<mat-toolbar>
+  <span>{{
+    mapService.coordinateForm.controls["$key"].value
+      ? "Modify An Existing Coordinate"
+      : "Add A New Coordinate"
+  }}</span>
+  <span class="fill-remaining-space"></span>
+  <button
+    class="button-dialog-close"
+    mat-stroked-button
+    (click)="onClose()"
+    tabIndex="-1"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form
+  [formGroup]="mapService.coordinateForm"
+  class="normal-form"
+  (submit)="onSubmit()"
+  autocomplete="off"
+>
+  <input type="hidden" formControlName="$key" />
+  <mat-form-field class="full-width">
+    <input
+      formControlName="title"
+      matInput
+      placeholder="Add A Title"
+      required
+    />
+    <mat-error
+      *ngIf="mapService.coordinateForm.controls['title'].errors?.required"
+      >This Field Is Mandatory</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input
+      formControlName="longitude"
+      matInput
+      placeholder="Value Of Longitude"
+      required
+    />
+    <mat-error
+      *ngIf="mapService.coordinateForm.controls['longitude'].errors?.required"
+      >This Field Is Mandatory</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input
+      formControlName="latitude"
+      matInput
+      placeholder="Value Of Latitude"
+      required
+    />
+    <mat-error
+      *ngIf="mapService.coordinateForm.controls['latitude'].errors?.required"
+      >This Field Is Mandatory</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input
+      formControlName="altitude"
+      matInput
+      placeholder="Value Of Altitude"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="category" placeholder="Select Category">
+      <mat-option selected value="Others">Others</mat-option>
+      <mat-option value="House">House</mat-option>
+      <mat-option value="Farm">Farm</mat-option>
+      <mat-option value="School">School</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="add-bottom-padding">
+    <div class="coordinate-button">
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="mapService.coordinateForm.invalid"
+      >
+        {{
+          mapService.coordinateForm.controls["$key"].value ? "Update" : "Submit"
+        }}
+      </button>
+    </div>
+  </div>
+</form>
