@@ -18,6 +18,7 @@ export class ImagesService {
 
   task: AngularFireUploadTask;
   progressPercentage: Observable<number>;
+  uploadPercent: number;
 
   galleryImagesList: AngularFireList<any>;
 
@@ -94,7 +95,7 @@ export class ImagesService {
     this.galleryImagesList.remove($key);
   }
 
-  uploadContactImage(contact, imageSrc) {
+  uploadContactImage(contact, imageSrc): Observable<number> {
     const filePath = `Contacts/${ contact.firstName.toLowerCase() + '-' + contact.userName.toLowerCase() + '-' + contact.lastName.toLowerCase() }_${ new Date().getTime() }`;
     const fileRef = this.storage.ref(filePath);
     this.storage.upload(filePath, imageSrc).snapshotChanges().pipe(
@@ -111,9 +112,11 @@ export class ImagesService {
         });
       })
     ).subscribe();
+    // Percentage Monitoring
+    return this.task.percentageChanges();
   }
 
-  updateContactImage(contact, imageSrc) {
+  updateContactImage(contact, imageSrc): Observable<number> {
     const filePath = `Contacts/${ contact.firstName.toLowerCase() + '-' + contact.userName.toLowerCase() + '-' + contact.lastName.toLowerCase() }_${ new Date().getTime() }`;
     const fileRef = this.storage.ref(filePath);
     this.storage.upload(filePath, imageSrc).snapshotChanges().pipe(
@@ -124,9 +127,23 @@ export class ImagesService {
         });
       })
     ).subscribe();
+    // Percentage Monitoring
+    return this.task.percentageChanges();
   }
 
-  uploadGalleryImage(details, imageSrc) {
+  uploadPercentage(taskPercentage): Observable<number> {
+    return taskPercentage;
+  }
+
+  updatePercentage(taskPercentage) {
+    this.uploadPercentage(taskPercentage).subscribe(
+        percentage => {
+          this.uploadPercent = Math.round(percentage);
+        }
+      );
+  }
+
+  uploadGalleryImage(details, imageSrc): Observable<number> {
     const filePath = `${ details.category }/${ details.caption }_${ new Date().getTime() }`;
     const fileRef = this.storage.ref(filePath);
     // Main Task
@@ -145,7 +162,15 @@ export class ImagesService {
           this.progressPercentage = null;
         });
       })
-    ).subscribe();
+    ).subscribe(
+      item => {
+        // Update Percentage
+        this.updatePercentage(this.task.percentageChanges());
+        console.log(`Task Subscribe Item: ${ item }`);
+      }
+    );
+    // Percentage Monitoring
+    return this.task.percentageChanges();
   }
 
   getImages() {

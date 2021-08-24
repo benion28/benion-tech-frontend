@@ -10,6 +10,8 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./admin-image-gallery.component.css']
 })
 export class AdminImageGalleryComponent implements OnInit {
+  percentage: number;
+
   images = {
     image: null,
     selected: null
@@ -42,7 +44,11 @@ export class AdminImageGalleryComponent implements OnInit {
 
   onSubmit() {
     if (this.imagesService.galleryImagesForm.valid) {
-      this.imagesService.uploadGalleryImage(this.imagesService.galleryImagesForm.value, this.images.selected);
+      this.imagesService.uploadGalleryImage(this.imagesService.galleryImagesForm.value, this.images.selected).subscribe(
+        percentage => {
+          this.percentage = Math.round(percentage);
+        }
+      );
       this.images = {
         image: null,
         selected: null

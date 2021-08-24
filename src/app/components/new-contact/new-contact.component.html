@@ -91,6 +91,10 @@
                 <div class="add-bottom-padding">
                     <mat-checkbox formControlName="isWorking">Have A Job</mat-checkbox>
                 </div>
+                <div *ngIf="imagesService.progressPercentage != null" class="progress-bar">
+                    <mat-progress-bar mode="determinate" value="(imagesService.progressPercentage | async) ? percentage : 0" color="accent"></mat-progress-bar>
+                    <small>Uploading Photo ({{ (imagesService.progressPercentage | async) ? percentage : 0 }}%) .....</small>
+                </div>
                 <div class="button-row">
                     <button mat-raised-button color="accent" type="submit" [disabled]="contactsService.contactForm.invalid">{{ contactsService.contactForm.controls['$key'].value?"Update":"Submit" }}</button>
                     <button mat-raised-button color="warn" (click)="onClear()">Reset</button>

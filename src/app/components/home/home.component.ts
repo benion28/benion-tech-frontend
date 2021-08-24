@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
   viewNews(news) {
     this.newsOpen = {
       title: news.title,
-      imgSrc: news.imgSrc,
+      imgSrc: news.imgSrc.trim(),
       details: news.details
     };
   }

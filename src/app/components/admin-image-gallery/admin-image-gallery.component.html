@@ -63,8 +63,10 @@
                     </mat-select>
                 </mat-form-field>
                 <div *ngIf="imagesService.progressPercentage != null" class="progress-bar">
-                    <mat-progress-bar mode="determinate" value="(imagesService.progressPercentage | async) ? (imagesService.progressPercentage | async) : 0" color="accent"></mat-progress-bar>
-                    <small>Uploading Photo ({{ (imagesService.progressPercentage | async) ? (imagesService.progressPercentage | async) : 0 }}%)...</small>
+                    <mat-progress-bar mode="determinate" value="(imagesService.progressPercentage | async) ? imagesService.uploadPercent : 0" color="accent"></mat-progress-bar>
+                    <small>Upload Progress -- {{ (imagesService.progressPercentage | async) ? imagesService.uploadPercent : 0 }}% --</small>
+                    <mat-progress-bar mode="determinate" value="(imagesService.progressPercentage | async) ? percentage : 0" color="accent"></mat-progress-bar>
+                    <small>Uploading Photo ({{ (imagesService.progressPercentage | async) ? percentage : 0 }}%) .....{{ percentage == 100 ? "-- Completed --" : "" }}</small>
                 </div>
                 <div class="add-bottom-padding">
                     <div class="gallery-button">

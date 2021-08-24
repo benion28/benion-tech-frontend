@@ -44,7 +44,8 @@ import { NotificationsService } from './services/notifications.service';
 import { environment } from '../environments/environment';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider'
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NewsService } from './services/news.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from './services/users.service';
@@ -108,6 +109,7 @@ import { GoogleMapComponent } from './components/google-map/google-map.component
     MatTooltipModule,
     MatListModule,
     MatTabsModule,
+    MatProgressBarModule,
     MatExpansionModule
   ],
   providers: [

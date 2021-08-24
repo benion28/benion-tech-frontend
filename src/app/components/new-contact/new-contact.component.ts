@@ -11,6 +11,8 @@ import { ImagesService } from 'src/app/services/images.service';
   styleUrls: ['./new-contact.component.css']
 })
 export class NewContactComponent implements OnInit {
+  percentage: number;
+
   images = {
     image: null,
     selected: null,
@@ -41,7 +43,11 @@ export class NewContactComponent implements OnInit {
     if (this.contactsService.contactForm.valid) {
       const details = this.contactsService.contactForm.value;
       if (!this.contactsService.contactForm.get('$key').value) {
-        this.imagesService.uploadContactImage(details, this.images.selected);
+        this.imagesService.uploadContactImage(details, this.images.selected).subscribe(
+        percentage => {
+          this.percentage = Math.round(percentage);
+        }
+      );
         this.images = {
           image: null,
           selected: null,
@@ -58,7 +64,11 @@ export class NewContactComponent implements OnInit {
             retrieved: null
           };
         } else {
-          this.imagesService.updateContactImage(details, this.images.selected);
+          this.imagesService.updateContactImage(details, this.images.selected).subscribe(
+            percentage => {
+              this.percentage = Math.round(percentage);
+            }
+          );
           this.images = {
             image: null,
             selected: null,
