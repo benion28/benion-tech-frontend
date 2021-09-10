@@ -1,0 +1,167 @@
+.chat-login-body {
+    background: #090931;
+	color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 25px 25px 25px;
+    height: 110vh;
+}
+
+.chat-login-container {
+    background: #161899;
+    color: #ffffff;
+    border: #cf811b solid 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 2px 5px;
+    height: 90%;
+    width: 50%;
+}
+
+.chat-login-nav {
+    padding: 0px 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.chat-login-join-header {
+    background: #3a3dc2;
+    border: #0b8a0b solid 2px;
+    border-radius: 5px;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+
+.chat-login-join-header h1 {
+    font-size: 40px;
+    text-align: center;
+    color: #7faa29;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+.chat-login-nav a {
+    cursor: pointer;
+    border: #0b8a0b solid 2px;
+    border-radius: 5px;
+    background: #3a3dc2;
+    color: #cfdbdb;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.chat-login-nav a:hover {
+    background: #055832;
+    color: #e04545;
+    opacity: 0.7;
+}
+
+.chat-login-join-main {
+    background: #030420;
+    color: #2c2fee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    height: 80%;
+}
+
+.chat-login-form-control label {
+    display: block;
+    font-size: 24px;
+    text-align: center;
+    background: #3a3dc2;
+    color: #fff;
+    border: #0b8a0b solid 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.chat-login-form-control input {
+    font-size: 21px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: none;
+    color: #8bbd28;
+    border-bottom: 2pt solid #eb1a1a;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.chat-login-form-control select {
+    cursor: pointer;
+    font-size: 26px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: none;
+    color: #8bbd28;
+    border-bottom: 2pt solid #eb1a1a;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.chat-login-form-control select option {
+    cursor: pointer;
+    font-size: 26px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: #3c3c72;
+    color: #8bbd28;
+}
+
+.chat-login-button {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.chat-login-button button {
+    cursor: pointer;
+    display: block;
+    font-size: 26px;
+    text-align: center;
+    background: #3a3dc2;
+    color: #e69a36;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.chat-login-button button:hover {
+    background: #17bb17;
+}
+
+.chat-login-user-icon {
+    background: #030420;
+    border: 2pt solid #cf811b;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 756px) {
+    .chat-login-body {
+        background: #090931;
+        color: #fff;
+        height: 110vh;
+        width: 94%;
+    }
+
+    .chat-login-container {
+        height: 98%;
+        width: 80%;
+    }
+
+    .chat-login-form-control input {
+        width: 98%;
+    }
+
+    .chat-login-form-control label {
+        width: 98%;
+    }
+}
